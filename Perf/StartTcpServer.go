@@ -1,4 +1,4 @@
-package main
+package Perf
 
 import (
 	"fmt"
@@ -14,7 +14,7 @@ import (
 var sum int64 = 0
 var tsum int64 = 0
 
-func main() {
+func StartTcpServer() {
 	CloseHandler()
 
 	addr, _ := net.ResolveTCPAddr("tcp", ":8240")

@@ -1,4 +1,4 @@
-package main
+package Perf
 
 import (
 	"bytes"
@@ -6,7 +6,7 @@ import (
 	"net"
 )
 
-func main() {
+func StartTcpClient() {
 
 	SendPacket()
 
