@@ -7,12 +7,6 @@ import (
 )
 
 func StartTcpClient() {
-
-	sendPacket()
-
-}
-
-func sendPacket() {
 	sum := 0
 	ec := 0
 	count := 0
