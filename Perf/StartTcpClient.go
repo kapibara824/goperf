@@ -8,11 +8,11 @@ import (
 
 func StartTcpClient() {
 
-	SendPacket()
+	sendPacket()
 
 }
 
-func SendPacket() {
+func sendPacket() {
 	sum := 0
 	ec := 0
 	count := 0
