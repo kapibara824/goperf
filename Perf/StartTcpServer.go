@@ -7,13 +7,15 @@ import (
 	"net"
 	"os"
 	"os/signal"
+	"strconv"
 	"syscall"
+	"time"
 )
 
 var sum int64 = 0
 var tsum int64 = 0
 
-func StartTcpServer(time int) {
+func StartTcpServer(duration string) {
 	CloseHandler()
 
 	addr, _ := net.ResolveTCPAddr("tcp", ":8240")
@@ -28,6 +30,17 @@ func StartTcpServer(time int) {
 	ticker := time.NewTicker(time.Second * 3)
 	defer ticker.Stop()
 
+	timer, err := strconv.Atoi(duration)
+	if err != nil {
+		log.Fatal(err)
+	}
+	timerfloat := float64(timer)
+	duration += "s"
+	d, err := time.ParseDuration(duration)
+	if err != nil {
+		log.Fatal(err)
+	}
+	a := time.After(d)
 	for {
 		n, _ := io.CopyN(io.Discard, n, 1024*1024)
 		sum += n
@@ -35,11 +48,11 @@ func StartTcpServer(time int) {
 		case <-ticker.C:
 			log.Printf("%.3fGbps\n", float64(sum-tsum)/3/1024/1024/1024*8)
 			tsum = sum
-		case <-time.After(time * time.Second):
-			total := int(sum)
-			fmt.Println("%.3Gbps\n", total/time/1024/1024/1024*8)
-			fmt.Println("Received", total, "Gbytes")
-			os.Exit(0)
+		case <-a:
+			total := float64(sum)
+			log.Printf("%.3fGbps\n", float64(total/timerfloat)/1024/1024/1024*8)
+			fmt.Println("Receivd", sum/1024/1024/1024, "Gbytes")
+			return
 		default:
 		}
 	}
