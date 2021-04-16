@@ -12,9 +12,6 @@ func StartTcpClient(ipaddr string) {
 	count := 0
 	data := 0
 	repeat := bytes.Repeat([]byte("a"), 2048*10)
-	//res := make([]byte, 1024)
-	//b := []byte("hello")
-	//buf := make([]byte, 1024)
 	add := ipaddr + ":8240"
 	addr, err := net.ResolveTCPAddr("tcp", add)
 	if err != nil {
