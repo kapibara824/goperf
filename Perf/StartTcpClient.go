@@ -6,7 +6,7 @@ import (
 	"net"
 )
 
-func StartTcpClient() {
+func StartTcpClient(ipaddr string) {
 	sum := 0
 	ec := 0
 	count := 0
@@ -15,7 +15,8 @@ func StartTcpClient() {
 	//res := make([]byte, 1024)
 	//b := []byte("hello")
 	//buf := make([]byte, 1024)
-	addr, err := net.ResolveTCPAddr("tcp", "localhost:8240")
+	add := ipaddr + ":8240"
+	addr, err := net.ResolveTCPAddr("tcp", add)
 	if err != nil {
 		log.Fatal(err)
 	}
