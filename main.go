@@ -1,11 +1,26 @@
 package main
 
 import (
+	"flag"
 	"goperf/Perf"
+	"log"
+)
+
+var (
+	servermode = flag.Bool("s", false, "Server mode")
+	ipaddr     = flag.String("t", "localhost", "Destination Address")
 )
 
 func main() {
-	Perf.StartTcpServer()
-	Perf.StartTcpClient()
+	flag.Parse()
+	if *servermode {
+		log.Println("Running Server mode.")
+		Perf.StartTcpServer()
+	}
+	if !*servermode {
+		log.Println("Running Client mode.")
+		log.Println("Send to", *ipaddr)
+		Perf.StartTcpClient(*ipaddr)
+	}
 
 }
