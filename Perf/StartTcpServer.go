@@ -30,13 +30,14 @@ func StartTcpServer() {
 	defer ticker.Stop()
 
 	for {
+		n, _ := io.CopyN(io.Discard, n, 1024*1024)
+		sum += n
 		select {
 		case <-ticker.C:
+
 			log.Printf("%.3fGbps\n", float64(sum-tsum)/3/1024/1024/1024*8)
 			tsum = sum
 		default:
-			n, _ := io.CopyN(io.Discard, n, 1024*1024)
-			sum += n
 		}
 	}
 }
