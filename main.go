@@ -8,7 +8,7 @@ import (
 
 var (
 	servermode = flag.Bool("s", false, "Server mode")
-	ipaddr     = flag.String("t", "localhost", "Destination Address")
+	ipaddr     = flag.String("c", "localhost", "Destination Address")
 )
 
 func main() {
