@@ -51,7 +51,7 @@ func StartTcpServer(duration string) {
 		case <-a:
 			total := float64(sum)
 			log.Printf("%.3fGbps\n", float64(total/timerfloat)/1024/1024/1024*8)
-			fmt.Println("Received", sum/1024/1024/1024, "Gbytes")
+			fmt.Println("Total Received", sum/1024/1024/1024, "Gbytes")
 			return
 		default:
 		}
